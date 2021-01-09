@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option csharp_namespace = "UsersService.Entities.Protos";
+
+package user;
+
+service UsersService {
+    rpc RequestUser (GetUserRequest) returns (User);
+
+    rpc RequestUsers (GetUsersRequest) returns (Users);
+
+    rpc CreateUser (User) returns (EmptyResponse);
+
+    rpc CreateUsers (Users) returns (EmptyResponse);
+}
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message GetUsersRequest {
+}
+
+message EmptyResponse{
+}
+
+enum Gender {
+    GENDER_NONE = 0;
+    GENDER_FEMALE = 1;
+    GENDER_MALE = 2;
+    GENDER_OTHER = 3;
+}
+
+message Address {
+    string id = 1;
+    string street = 2;
+    int32 doorNumber = 3;
+    string zipCode = 4;
+    string city = 5;
+    string country = 6;
+}
+
+message User {
+    string id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    int32 age = 4;
+    Gender gender = 5;
+    string email = 6;
+    Address address = 7;
+}
+
+message Users {
+    repeated User users = 1;
+}
